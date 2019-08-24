@@ -14,8 +14,17 @@ class Node
   end
 
   def remove
+    if self.next
+      self.next.prev = self.prev
+    end
+    if self.prev
+      self.prev.next = self.next
+    end
+    self.next = nil
+    self.prev = nil
     # optional but useful, connects previous link to next link
     # and removes self from list.
+    return self
   end
 end
 
