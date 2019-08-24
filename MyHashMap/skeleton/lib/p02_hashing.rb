@@ -4,6 +4,9 @@ end
 
 class Array
   def hash
+    self.each_with_index.inject(0) do |h, (el, i)|
+      (el.hash + i.hash) ^ h
+    end
   end
 end
 

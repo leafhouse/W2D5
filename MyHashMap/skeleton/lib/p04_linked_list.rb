@@ -29,7 +29,15 @@ class Node
 end
 
 class LinkedList
+  attr_accessor :head, :tail
+  include Enumerable
+  
   def initialize
+    @head = Node.new
+    @tail = Node.new
+
+    @tail.prev = @head
+    @head.next = @tail
   end
 
   def [](i)
@@ -38,12 +46,22 @@ class LinkedList
   end
 
   def first
+    if self.empty?
+      return nil
+    else
+      self.tail.prev
+    end
   end
 
   def last
   end
 
   def empty?
+    if self.head.next == self.tail
+      true
+    else
+      false
+    end
   end
 
   def get(key)
