@@ -29,8 +29,8 @@ class Node
 end
 
 class LinkedList
-  attr_accessor :head, :tail
   include Enumerable
+  attr_reader :head, :tail
   
   def initialize
     @head = Node.new
@@ -54,6 +54,11 @@ class LinkedList
   end
 
   def last
+    if empty?
+      nil
+    else
+      self.tail.prev
+    end
   end
 
   def empty?
@@ -71,6 +76,12 @@ class LinkedList
   end
 
   def append(key, val)
+    node = Node.new(key, val)
+    self.tail.prev.next = node
+    node.prev = self.tail.prev
+    node.next = self.tail
+    self.tail.prev = node
+    node
   end
 
   def update(key, val)
@@ -80,6 +91,7 @@ class LinkedList
   end
 
   def each
+  
   end
 
   # uncomment when you have `each` working and `Enumerable` included
